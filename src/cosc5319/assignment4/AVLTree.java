@@ -9,11 +9,11 @@ public class AVLTree {
     private TreeNode P = new TreeNode(null);
     
     public AVLTree() {
-            head.setLTag(false);
-            head.setLLink(head);
-            head.setWidget(null);
-            head.setRLink(head);
-            head.setRTag(true);
+            head.setLTag(false);    // left child yes/no
+            head.setLLink(head);    // link to left child
+            head.setWidget(null);   // datum
+            head.setRLink(head);    // link to right child
+            head.setRTag(true);     // right child yes/no
     }
 
     public TreeNode getHead() {
@@ -28,8 +28,8 @@ public class AVLTree {
         TreeNode Q = new TreeNode(w);
         boolean found;
 
-        if (!head.getLTag()) {
-            root = Q;
+        if (head.getLTag() == false) {      // if head's LTag is false,
+            root = Q;                       //   then no tree exists
             root.setLLink(head);
             root.setRLink(head);
             head.setLLink(root);
@@ -39,7 +39,7 @@ public class AVLTree {
             P = root;
             do {
                 if (w.getPrice() < P.getPrice()) {// compare Widget prices
-                    if (!P.getLTag()) { // empty left subtree
+                    if (P.getLTag() == false) { // empty left subtree
                         Q.setAllAttr(P.getLTag(), P.getLLink(), P, false);
                         P.setLLink(Q);
                         P.setLTag(true);
@@ -48,7 +48,7 @@ public class AVLTree {
                         P = P.getLLink();
                     }
                 } else {
-                    if (!P.getRTag()) { // empty right subtree
+                    if (P.getRTag() == false) { // empty right subtree
                         Q.setAllAttr(false, P, P.getRLink(), P.getRTag());
                         P.setRLink(Q);
                         P.setRTag(true);
@@ -119,7 +119,6 @@ public class AVLTree {
     public TreeNode FindParent(TreeNode searchPoint, int price) {
         while (true)
         {
-            //int num = String.Compare(name, searchPoint.getPrice());
             if (price == searchPoint.getPrice())
                 return searchPoint;
             else if (searchPoint.getPrice() > price)
@@ -275,18 +274,25 @@ public class AVLTree {
         }
     }
     
-    public void PrintTree(TreeNode n, int depth) {
-        if (n != null) {
-            PrintTree(n.getLLink(), depth+1);
-            for (int i=0; i<depth; i++) {
-                System.out.print("\t");
-            }
-            System.out.println(n.getWidgetID() + ", " + 
-                               n.getDescription() + ", " +
-                               n.getPrice());
-            PrintTree(n.getRLink(), depth+1);
-        }
+    public void PrintTree() {
+        PrintTreeR(this.root, 0);
     }
-
+    
+    private void PrintTreeR(TreeNode n, int level) {
+        if (n == null)
+            return;
+        if (n.getRTag() == true)
+            PrintTreeR(n.getRLink(), level+1);
+        if (level != 0) {
+            for (int i=0; i<level; i++) {
+                System.out.print("|\t");
+            }
+            System.out.println("|-------" + n.getPrice());
+        } else {
+            System.out.println(n.getPrice());
+        }
+        if (n.getLTag() == true)
+            PrintTreeR(n.getLLink(), level+1);
+    }
 }
 

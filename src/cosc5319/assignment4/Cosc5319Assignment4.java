@@ -5,7 +5,6 @@ public class Cosc5319Assignment4 {
 
     public static void main(String[] args) {
         AVLTree myTree = new AVLTree();
-        TreeNode Q;
         
         System.out.println("Inserting data...");
         myTree.InsertAVLTree(new Widget(10, "Ten", 1010));
@@ -13,8 +12,12 @@ public class Cosc5319Assignment4 {
         myTree.InsertAVLTree(new Widget(15, "Fifteen", 1551));
         myTree.InsertAVLTree(new Widget(1, "One", 111));
         myTree.InsertAVLTree(new Widget(2, "Two", 22222));
+        myTree.InsertAVLTree(new Widget(15, "Whatever1", 8745));
+        myTree.InsertAVLTree(new Widget(3, "Whatever2", 5124));
+        myTree.InsertAVLTree(new Widget(4, "Whatever3", 553));
+        System.out.println("Insertion done.");
         
-        // test
+        myTree.PrintTree();
     }
     
 }
