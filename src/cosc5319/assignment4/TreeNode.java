@@ -112,17 +112,18 @@ public class TreeNode {
     }
     
     private int height() {
-        int leftHeight = (getLLink() == null) ? 0:getLLink().height();
-        int rightHeight = (getRLink() == null) ? 0:getRLink().height();
+        int leftHeight = (getLTag() == false) ? 0:LLink.height();
+        int rightHeight = (getRTag() == false) ? 0:RLink.height();
         
         return 1 + Math.max(leftHeight, rightHeight);
     }
     
     
     public int getBalance() {
-        int leftHeight = (getLLink() == null) ? 0:getLLink().height();
-        int rightHeight = (getRLink() == null) ? 0:getRLink().height();
+        int leftHeight = (getLTag() == false) ? 0:LLink.height();
+        int rightHeight = (getRTag() == false) ? 0:RLink.height();
         
         return rightHeight - leftHeight;
     }
+    
 }
