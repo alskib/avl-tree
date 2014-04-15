@@ -3,23 +3,19 @@ package cosc5319.assignment4;
 
 public class TreeNode {
     private TreeNode LLink, RLink;
-    private boolean LTag, RTag, visited;
+    private boolean visited;
     private Widget widget;
     
     public TreeNode(Widget wid) {
         this.widget = wid;
         LLink = this;
-        LTag = false;
-        RTag = false;
         RLink = this;
         visited = false;
     }
     
-    public void setAllAttr(boolean lt, TreeNode ll, TreeNode rl, boolean rt) {
-        LTag = lt;
+    public void setAllAttr(TreeNode ll, TreeNode rl) {
         LLink = ll;
         RLink = rl;
-        RTag = rt;
     }
     
     // Left link get/set
@@ -38,24 +34,6 @@ public class TreeNode {
     
     public TreeNode getRLink() {
         return RLink;
-    }
-    
-    // Left tag get/set
-    public void setLTag(boolean b) {
-        LTag = b;
-    }
-    
-    public boolean getLTag() {
-        return LTag;
-    }
-    
-    // Right tag get/set
-    public void setRTag(boolean b) {
-        RTag = b;
-    }
-    
-    public boolean getRTag() {
-        return RTag;
     }
     
     // Visited get/set
@@ -112,16 +90,16 @@ public class TreeNode {
     }
     
     private int height() {
-        int leftHeight = (getLTag() == false) ? 0:LLink.height();
-        int rightHeight = (getRTag() == false) ? 0:RLink.height();
+        int leftHeight = (LLink == null) ? 0:LLink.height();
+        int rightHeight = (RLink == null) ? 0:RLink.height();
         
         return 1 + Math.max(leftHeight, rightHeight);
     }
     
     
     public int getBalance() {
-        int leftHeight = (getLTag() == false) ? 0:LLink.height();
-        int rightHeight = (getRTag() == false) ? 0:RLink.height();
+        int leftHeight = (LLink == null) ? 0:LLink.height();
+        int rightHeight = (RLink == null) ? 0:RLink.height();
         
         return rightHeight - leftHeight;
     }

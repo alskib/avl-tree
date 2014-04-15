@@ -7,13 +7,13 @@ public class Cosc5319Assignment4 {
         AVLTree myTree = new AVLTree();
         
         System.out.println("Inserting data...");
-        myTree.InsertNode(new Widget(10, "Ten", 1010));
-        myTree.InsertNode(new Widget(5, "Five", 1515));
-        myTree.InsertNode(new Widget(1, "One", 1313));
-        myTree.InsertNode(new Widget(1, "One", 1212));
-        myTree.InsertNode(new Widget(1, "One", 1111));
-//        myTree.InsertNode(new Widget(15, "Fifteen", 1551));
-//        myTree.InsertNode(new Widget(2, "Two", 22222));
+        myTree.InsertNode(new Widget(10, "10", 10));
+        myTree.InsertNode(new Widget(15, "15", 15));
+        myTree.InsertNode(new Widget(13, "13", 13));
+        myTree.InsertNode(new Widget(12, "12", 12));
+        myTree.InsertNode(new Widget(11, "11", 11));
+//        myTree.InsertNode(new Widget(15, "Fifteen", 16));
+//        myTree.InsertNode(new Widget(2, "Two", 22));
 //        myTree.InsertNode(new Widget(15, "Whatever1", 8745));
 //        myTree.InsertNode(new Widget(3, "Whatever2", 5124));
 //        myTree.InsertNode(new Widget(4, "Whatever3", 553));
