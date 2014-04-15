@@ -111,4 +111,18 @@ public class TreeNode {
         this.widget.setDescription(desc);
     }
     
+    private int height() {
+        int leftHeight = (getLLink() == null) ? 0:getLLink().height();
+        int rightHeight = (getRLink() == null) ? 0:getRLink().height();
+        
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+    
+    
+    public int getBalance() {
+        int leftHeight = (getLLink() == null) ? 0:getLLink().height();
+        int rightHeight = (getRLink() == null) ? 0:getRLink().height();
+        
+        return rightHeight - leftHeight;
+    }
 }

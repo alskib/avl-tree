@@ -6,7 +6,7 @@ import java.util.Stack;
 public class AVLTree {
     private TreeNode root = new TreeNode(null);
     private TreeNode head = new TreeNode(null);
-    private TreeNode P = new TreeNode(null);
+    private TreeNode P = new TreeNode(null);    // pointer for traversal
     
     public AVLTree() {
             head.setLTag(false);    // left child yes/no
@@ -25,7 +25,7 @@ public class AVLTree {
     }
     
     public void InsertAVLTree(Widget w) {
-        TreeNode Q = new TreeNode(w);
+        TreeNode Q = new TreeNode(w); // node to be inserted
         boolean found;
 
         if (head.getLTag() == false) {      // if head's LTag is false,
@@ -38,16 +38,16 @@ public class AVLTree {
             found = false;
             P = root;
             do {
-                if (w.getPrice() < P.getPrice()) {// compare Widget prices
+                if (w.getPrice() < P.getPrice()) { // new node value is lower
                     if (P.getLTag() == false) { // empty left subtree
                         Q.setAllAttr(P.getLTag(), P.getLLink(), P, false);
                         P.setLLink(Q);
                         P.setLTag(true);
                         found = true;
-                    } else {
+                    } else { // pointer node has left child, traverse down the left
                         P = P.getLLink();
                     }
-                } else {
+                } else { // new node value is higher
                     if (P.getRTag() == false) { // empty right subtree
                         Q.setAllAttr(false, P, P.getRLink(), P.getRTag());
                         P.setRLink(Q);
@@ -55,8 +55,9 @@ public class AVLTree {
                         if (Q.getRTag()) {
                             TreeNode t = InOrderSuccessor(P);
                             t.setLLink(Q);
-                        } found = true;
-                    } else {
+                        }
+                        found = true;
+                    } else { // pointer node has right child, traverse down the right
                         P = P.getRLink();
                     }
                 }
@@ -114,6 +115,20 @@ public class AVLTree {
             while (Q.getLTag())
                 Q = Q.getLLink();
         return Q;
+    }
+     
+    public void InOrderTraversal() {
+        TreeNode T = this.root;
+        
+        if (T != null) {
+            while (T.getLTag() == true) {
+                T = T.getLLink();   // drill down to node with smallest value
+            }
+            do {
+                System.out.println(T.getPrice());
+                T = InOrderSuccessor(T);
+            } while (T != this.head);
+        }
     }
 
     public TreeNode FindParent(TreeNode searchPoint, int price) {

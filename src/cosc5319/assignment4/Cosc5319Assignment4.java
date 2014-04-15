@@ -18,6 +18,7 @@ public class Cosc5319Assignment4 {
         System.out.println("Insertion done.");
         
         myTree.PrintTree();
+        myTree.InOrderTraversal();
     }
     
 }
