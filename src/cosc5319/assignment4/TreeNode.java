@@ -6,10 +6,9 @@ public class TreeNode {
     private boolean visited;
     private Widget widget;
     
-    public TreeNode(Widget wid) {
-        this.widget = wid;
-        LLink = this;
-        RLink = this;
+    public TreeNode(Widget w) {
+        this.widget = w;
+        LLink = RLink = null;
         visited = false;
     }
     
@@ -18,18 +17,36 @@ public class TreeNode {
         RLink = rl;
     }
     
+    public void setLeft(Widget w) {
+        if (LLink == null)
+            this.LLink = new TreeNode(w);
+        else
+            this.LLink.setWidget(w);
+    }
+    
+    public void setRight(Widget w) {
+        if (RLink == null)
+            this.RLink = new TreeNode(w);
+        else
+            this.RLink.setWidget(w);
+    }
+    
+    public void setWidget(Widget w) {
+        this.widget = w;
+    }
+    
     // Left link get/set
-    public void setLLink(TreeNode link) {
-        LLink = link;
+    public void setLLink(TreeNode n) {
+        this.LLink = n;
     }
     
     public TreeNode getLLink() {
         return LLink;
     }
     
-    // Right link get/set
-    public void setRLink(TreeNode link) {
-        RLink = link;
+    // Right link get/set   
+    public void setRLink(TreeNode n) {
+        this.RLink = n;
     }
     
     public TreeNode getRLink() {
@@ -49,12 +66,6 @@ public class TreeNode {
         System.out.println("[" + this.widget.getWidgetID() + 
                            "] \"" + this.widget.getDescription() +
                            "\" - $" + this.widget.getPrice());
-    }
-    
-    public void setWidget(Widget w) {
-        if (w != null) {
-            this.widget = w;
-        }
     }
     
     public boolean isWidgetNull() {

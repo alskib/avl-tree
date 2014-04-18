@@ -7,16 +7,17 @@ public class Cosc5319Assignment4 {
         AVLTree myTree = new AVLTree();
         
         System.out.println("Inserting data...");
-        myTree.InsertNode(new Widget(10, "10", 10));
-        myTree.InsertNode(new Widget(15, "15", 15));
-        myTree.InsertNode(new Widget(13, "13", 13));
-        myTree.InsertNode(new Widget(12, "12", 12));
-        myTree.InsertNode(new Widget(11, "11", 11));
-//        myTree.InsertNode(new Widget(15, "Fifteen", 16));
-//        myTree.InsertNode(new Widget(2, "Two", 22));
-//        myTree.InsertNode(new Widget(15, "Whatever1", 8745));
-//        myTree.InsertNode(new Widget(3, "Whatever2", 5124));
-//        myTree.InsertNode(new Widget(4, "Whatever3", 553));
+        myTree.InsertNode(new TreeNode(new Widget(10, "10", 10)));
+        myTree.InsertNode(new TreeNode(new Widget(15, "15", 15)));
+        myTree.InsertNode(new TreeNode(new Widget(13, "13", 13)));
+        myTree.InsertNode(new TreeNode(new Widget(12, "12", 12)));
+        myTree.InsertNode(new TreeNode(new Widget(11, "11", 11)));
+        myTree.InsertNode(new TreeNode(new Widget(15, "Fifteen", 16)));
+        myTree.InsertNode(new TreeNode(new Widget(2, "Two", 22)));
+        myTree.InsertNode(new TreeNode(new Widget(15, "Whatever1", 8745)));
+        myTree.InsertNode(new TreeNode(new Widget(3, "Whatever2", 5124)));
+        myTree.InsertNode(new TreeNode(new Widget(4, "Whatever3", 553)));
+        myTree.DeleteByPrice(16);
         System.out.println("Insertion done.");
         
         myTree.PrintTree();
