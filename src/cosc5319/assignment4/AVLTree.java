@@ -14,8 +14,8 @@ public class AVLTree {
         return head;
     }
     
-    public void InsertNode(TreeNode n) {
-        InsertNode(n, head.getLLink());
+    public void InsertNode(int wid, String desc, int price) {
+        InsertNode(new TreeNode(new Widget(wid, desc, price)), head.getLLink());
     }
     
     private void InsertNode(TreeNode n, TreeNode tempNode) {
@@ -48,21 +48,19 @@ public class AVLTree {
             rotate(tempNode.getRLink(), tempNode);
     }
     
-    public TreeNode BinarySearch(int price) {
-        TreeNode P = this.getHead().getLLink();
+    public boolean BinarySearch(int price) {
+        TreeNode P = this.head.getLLink();
         do {
+            if (P == null)
+                return false;
             if (price == P.getPrice())
-                return P;
+                return true;
             else if (price < P.getPrice())
                 P = InOrderPredecessor(P);
             else
                 P = InOrderSuccessor(P);
-        } while (P != this.getHead());
-        return null;
-    }
-    
-    public TreeNode FindCustomerIterative(int price) {
-        return BinarySearch(price);
+        } while (P != this.head.getLLink());
+        return false;
     }
 
     public TreeNode InOrderPredecessor(TreeNode P) {
@@ -97,42 +95,9 @@ public class AVLTree {
             }
         }
     }
-
-    public TreeNode FindParent(TreeNode searchPoint, int price) {
-        while (true)
-        {
-            if (price == searchPoint.getPrice())
-                return searchPoint;
-            else if (searchPoint.getPrice() > price)
-            {
-                if (price == searchPoint.getRLink().getPrice())
-                    return searchPoint;
-                else if (searchPoint.getRLink() != null)
-                    searchPoint = searchPoint.getRLink();
-                else
-                    return null;
-            }
-            else
-            {
-                if (price == searchPoint.getLLink().getPrice())
-                    return searchPoint;
-                else if (searchPoint.getLLink() != null)
-                    searchPoint = searchPoint.getLLink();
-                else
-                    return null;
-            }
-        }
-    }
-
+    
     public void DeleteByPrice (int price) {
-        TreeNode foundNode = BinarySearch(price);
-        if (foundNode != null) {
-            System.out.println("Node with price " + price + " found, deleting.");
-            System.out.println(foundNode.getPrice());
-            DeleteByNode(price, foundNode);
-        } else {
-            System.out.println("Node with specified price not found.");
-        }
+        DeleteByNode(price, this.head.getLLink());
     }
     
     private void DeleteByNode(int price, TreeNode tempNode) {
@@ -141,6 +106,7 @@ public class AVLTree {
         
 //        if (tempNode != this.head)
         
+        // false looks left, true looks right
         boolean direction = false;
         if (price > tempNode.getPrice() && tempNode != this.head)
             direction = true;
@@ -157,6 +123,7 @@ public class AVLTree {
         if (tempNode == this.head && child.getBalance() == 0 && child.getPrice() == price) {
             TreeNode newRoot = child.getLLink();
             if (newRoot == null) {
+                this.head.setLLink(null);
                 return;
             } else {
                 ReallyDelete(tempNode, child, false);
@@ -257,9 +224,6 @@ public class AVLTree {
     
     private void rotate(TreeNode rotateBase, TreeNode rootAbove) {
         int balance = rotateBase.getBalance();
-        
-//        if (Math.abs(balance) < 2)
-//            System.out.println("No rotate.");
         
         TreeNode child = (balance < 0) ? rotateBase.getLLink() : rotateBase.getRLink();
         
